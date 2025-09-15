@@ -1,14 +1,33 @@
 "use client"; // Necesario porque usamos onClick (JS en el cliente)
-import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./cart.module.css"; // Importa los estilos específicos de esta página
 
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cart, setCart] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const userId = 1; // Demo: usuario fijo
 
   // Alterna abrir/cerrar menú
   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const res = await fetch(`http://localhost:8000/cart/?user_id=${userId}`);
+        const data = await res.json();
+        setCart(data);
+      } catch (err) {
+        setError("No se pudo cargar el carrito");
+      }
+      setLoading(false);
+    };
+    fetchCart();
+  }, []);
+
+  const total = cart.reduce((acc, item) => acc + (item.product?.price || 0) * item.quantity, 0);
 
   return (
     <div>
@@ -30,7 +49,6 @@ export default function Home() {
       <ul className={`dropdown ${menuOpen ? "show" : ""}`} id="menu">
         <li><a href="#">Ofertas</a></li>
         <li><a href="#">Todo</a></li>
-
         <details>
           <summary>Hombre ‣</summary>
           <ol>
@@ -44,7 +62,6 @@ export default function Home() {
             <li><a href="#">Zapatillas</a></li>
           </ol>
         </details>
-
         <details>
           <summary>Mujer ‣</summary>
           <ol>
@@ -62,13 +79,27 @@ export default function Home() {
 
       {/* Productos */}
       <main>
-
-        {/* Contenido */}
         <div className={style.container}>
-            <h2>Carrito de Compras</h2>
-            <div id="carrito-lista"></div>
-            <div className={style.total} id="carrito-total">Total: $0.00</div>
-            <button className={style["btn-comprar"]}>Realizar compra</button>
+          <h2>Carrito de Compras</h2>
+          {loading && <div>Cargando carrito...</div>}
+          {error && <div style={{color: '#ff5555'}}>{error}</div>}
+          {!loading && !error && cart.length === 0 && <div>No hay productos en el carrito.</div>}
+          {!loading && !error && cart.length > 0 && (
+            <>
+              {cart.map(item => (
+                <div key={item.id} className={style["carrito-item"]}>
+                  <img src={item.product?.image_url || "/buzo.jpeg"} alt={item.product?.name} />
+                  <div className={style.info}>
+                    <div>{item.product?.name}</div>
+                    <div>Cantidad: {item.quantity}</div>
+                    <div>Precio: ${item.product?.price}</div>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+          <div className={style.total} id="carrito-total">Total: ${total.toFixed(2)}</div>
+          <button className={style["btn-comprar"]}>Realizar compra</button>
         </div>
       </main>
     </div>

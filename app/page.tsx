@@ -1,11 +1,30 @@
 "use client"; // Necesario porque usamos onClick (JS en el cliente)
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Alterna abrir/cerrar menú
   const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  // Estado para productos
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/products/");
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        setError("No se pudieron cargar los productos");
+      }
+      setLoading(false);
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div>
@@ -27,7 +46,6 @@ export default function Home() {
       <ul className={`dropdown ${menuOpen ? "show" : ""}`} id="menu">
         <li><a href="#">Ofertas</a></li>
         <li><a href="#">Todo</a></li>
-
         <details>
           <summary>Hombre ‣</summary>
           <ol>
@@ -41,7 +59,6 @@ export default function Home() {
             <li><a href="#">Zapatillas</a></li>
           </ol>
         </details>
-
         <details>
           <summary>Mujer ‣</summary>
           <ol>
@@ -55,7 +72,6 @@ export default function Home() {
             <li><a href="#">Accesorios</a></li>
           </ol>
         </details>
-
         <details>
           <summary>Unisex ‣</summary>
           <ol>
@@ -68,7 +84,6 @@ export default function Home() {
         </details>
       </ul>
 
-      {/* fondo Productos (editar) */}
       <main className="productos-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
@@ -86,78 +101,25 @@ export default function Home() {
             }
           }
         `}</style>
-          <div style={{background: '#000', padding: '10px', borderRadius: '8px', textAlign: 'left', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%',}}>
-            <img src="/buzo.jpeg" alt="Conjunto Negro" style={{ width: '100%', borderRadius: '8px' }} />
-          <span style={{position: 'absolute', top: '15px', left: '15px', background: '#222', padding: '5px 10px', borderRadius: '5px', fontSize: '0.9rem', fontWeight: 'bold',}}>11% OFF</span>
-          <h3>Conjunto DAZLER NEGRO [Campera + Jogging] {"{Oversize}"}</h3>
-          <p style={{ textDecoration: 'line-through', color: 'gray', fontSize: '0.9rem' }}>$131.950</p>
-          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}>$117.948</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>$94.358,40 con Transferencia</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>6 cuotas sin interés de $19.658</p>
-          <button style={{background: '#222', border: 'none', marginTop: 'auto', padding: '10px', color: 'white', fontWeight: 'bold', borderRadius: '5px', width: '100%', cursor: 'pointer',}}>COMPRAR</button>
-        </div>
 
-          {/* Producto 2 */}
-
-        <div style={{ background: '#000', padding: '10px', borderRadius: '8px', textAlign: 'left', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%',}}>
-
-          <img src="/buzo.jpeg" alt="Buzo Oversize" style={{ width: '100%', borderRadius: '8px' }} />
-          
-          <span style={{ position: 'absolute', top: '15px', left: '15px', background: '#222', padding: '5px 10px', borderRadius: '5px', fontSize: '0.9rem', fontWeight: 'bold',}}>11% OFF</span>
-
-          <h3>Buzo Oversize Gris Claro</h3>
-          <p style={{ textDecoration: 'line-through', color: 'gray', fontSize: '0.9rem' }}>$131.950</p>
-          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}>$117.948</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>$94.358,40 con Transferencia</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>6 cuotas sin interés de $19.658</p>
-          <button style={{ background: '#222', border: 'none', marginTop: 'auto', padding: '10px', color: 'white', fontWeight: 'bold', borderRadius: '5px', width: '100%', cursor: 'pointer',}}>COMPRAR</button>
-        </div>
-
-        <div style={{background: '#000', padding: '10px', borderRadius: '8px', textAlign: 'left', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%',}}>
-            <img src="/buzo.jpeg" alt="Conjunto Negro" style={{ width: '100%', borderRadius: '8px' }} />
-          <span style={{position: 'absolute', top: '15px', left: '15px', background: '#222', padding: '5px 10px', borderRadius: '5px', fontSize: '0.9rem', fontWeight: 'bold',}}>11% OFF</span>
-          <h3>Conjunto DAZLER NEGRO [Campera + Jogging] {"{Oversize}"}</h3>
-          <p style={{ textDecoration: 'line-through', color: 'gray', fontSize: '0.9rem' }}>$131.950</p>
-          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}>$117.948</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>$94.358,40 con Transferencia</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>6 cuotas sin interés de $19.658</p>
-          <button style={{background: '#222', border: 'none', marginTop: 'auto', padding: '10px', color: 'white', fontWeight: 'bold', borderRadius: '5px', width: '100%', cursor: 'pointer',}}>COMPRAR</button>
-        </div>
-
-        <div style={{background: '#000', padding: '10px', borderRadius: '8px', textAlign: 'left', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%',}}>
-            <img src="/buzo.jpeg" alt="Conjunto Negro" style={{ width: '100%', borderRadius: '8px' }} />
-          <span style={{position: 'absolute', top: '15px', left: '15px', background: '#222', padding: '5px 10px', borderRadius: '5px', fontSize: '0.9rem', fontWeight: 'bold',}}>11% OFF</span>
-          <h3>Conjunto DAZLER NEGRO [Campera + Jogging] {"{Oversize}"}</h3>
-          <p style={{ textDecoration: 'line-through', color: 'gray', fontSize: '0.9rem' }}>$131.950</p>
-          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}>$117.948</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>$94.358,40 con Transferencia</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>6 cuotas sin interés de $19.658</p>
-          <button style={{background: '#222', border: 'none', marginTop: 'auto', padding: '10px', color: 'white', fontWeight: 'bold', borderRadius: '5px', width: '100%', cursor: 'pointer',}}>COMPRAR</button>
-        </div>
-
-        <div style={{background: '#000', padding: '10px', borderRadius: '8px', textAlign: 'left', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%',}}>
-            <img src="/buzo.jpeg" alt="Conjunto Negro" style={{ width: '100%', borderRadius: '8px' }} />
-          <span style={{position: 'absolute', top: '15px', left: '15px', background: '#222', padding: '5px 10px', borderRadius: '5px', fontSize: '0.9rem', fontWeight: 'bold',}}>11% OFF</span>
-          <h3>Conjunto DAZLER NEGRO [Campera + Jogging] {"{Oversize}"}</h3>
-          <p style={{ textDecoration: 'line-through', color: 'gray', fontSize: '0.9rem' }}>$131.950</p>
-          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}>$117.948</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>$94.358,40 con Transferencia</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>6 cuotas sin interés de $19.658</p>
-          <button style={{background: '#222', border: 'none', marginTop: 'auto', padding: '10px', color: 'white', fontWeight: 'bold', borderRadius: '5px', width: '100%', cursor: 'pointer',}}>COMPRAR</button>
-        </div>
-
-        <div style={{background: '#000', padding: '10px', borderRadius: '8px', textAlign: 'left', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%',}}>
-            <img src="/buzo.jpeg" alt="Conjunto Negro" style={{ width: '100%', borderRadius: '8px' }} />
-          <span style={{position: 'absolute', top: '15px', left: '15px', background: '#222', padding: '5px 10px', borderRadius: '5px', fontSize: '0.9rem', fontWeight: 'bold',}}>11% OFF</span>
-          <h3>Conjunto DAZLER NEGRO [Campera + Jogging] {"{Oversize}"}</h3>
-          <p style={{ textDecoration: 'line-through', color: 'gray', fontSize: '0.9rem' }}>$131.950</p>
-          <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}>$117.948</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>$94.358,40 con Transferencia</p>
-          <p style={{ fontSize: '0.9rem', color: '#ccc' }}>6 cuotas sin interés de $19.658</p>
-          <button style={{background: '#222', border: 'none', marginTop: 'auto', padding: '10px', color: 'white', fontWeight: 'bold', borderRadius: '5px', width: '100%', cursor: 'pointer',}}>COMPRAR</button>
-        </div>
-
-
+        {loading && <div>Cargando productos...</div>}
+        {error && <div style={{color: '#ff5555'}}>{error}</div>}
+        {!loading && !error && products.length === 0 && <div>No hay productos.</div>}
+        {!loading && !error && products.map(product => (
+          <div key={product.id} style={{background: '#000', padding: '10px', borderRadius: '8px', textAlign: 'left', position: 'relative', display: 'flex', flexDirection: 'column', height: '100%',}}>
+            <img src={product.image_url || "/buzo.jpeg"} alt={product.name} style={{ width: '100%', borderRadius: '8px' }} />
+            {product.discount > 0 && (
+              <span style={{position: 'absolute', top: '15px', left: '15px', background: '#222', padding: '5px 10px', borderRadius: '5px', fontSize: '0.9rem', fontWeight: 'bold',}}>
+                {product.discount}% OFF
+              </span>
+            )}
+            <h3>{product.name}</h3>
+            <p style={{ textDecoration: 'line-through', color: 'gray', fontSize: '0.9rem' }}>{product.price && product.discount ? `$${(product.price / (1 - product.discount / 100)).toFixed(2)}` : ''}</p>
+            <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fff' }}>${product.price}</p>
+            <p style={{ fontSize: '0.9rem', color: '#ccc' }}>{product.description}</p>
+            <button style={{background: '#222', border: 'none', marginTop: 'auto', padding: '10px', color: 'white', fontWeight: 'bold', borderRadius: '5px', width: '100%', cursor: 'pointer',}}>COMPRAR</button>
+          </div>
+        ))}
       </main>
     </div>
   );
