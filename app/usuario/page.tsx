@@ -18,7 +18,7 @@ export default function Home() {
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
   useEffect(() => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    const token = typeof window !== "undefined" ? localStorage.getItem("tokenkick") : null;
     if (token) {
       setHasToken(true);
       const fetchUser = async () => {
