@@ -1,3 +1,49 @@
+# KickShopping Frontend
+
+## Descripción
+Frontend desarrollado con Next.js y TypeScript para la tienda KickShopping. Permite registro, login, gestión de productos, carrito y roles de usuario (vendedor/comprador).
+
+## Requisitos
+- Node.js 18 o superior
+- npm
+
+## Instalación
+1. Clona el repositorio y navega a la carpeta `Frontend`.
+2. Instala las dependencias:
+   ```powershell
+   npm install
+   ```
+
+## Configuración
+- El archivo `next.config.ts` ya está preparado para desarrollo local.
+- El frontend se conecta al backend en `http://localhost:8000`.
+- No requiere configuración adicional para desarrollo local.
+
+## Ejecución
+1. Inicia el servidor de desarrollo:
+   ```powershell
+   npm run dev
+   ```
+2. Accede a la app en [http://localhost:3000](http://localhost:3000)
+
+## Funcionalidades principales
+- Registro de usuario como vendedor o comprador
+- Login y autenticación con JWT
+- Visualización y publicación de productos
+- Carrito de compras
+- Perfil de usuario con tipo (vendedor/comprador)
+- Menús dinámicos según el rol
+
+## Conexión con el backend
+- El frontend realiza peticiones a la API FastAPI en `http://localhost:8000`.
+- El token JWT se guarda en `localStorage` y se envía en las peticiones protegidas.
+
+## Notas
+- Si el backend no está corriendo, el frontend mostrará errores de conexión.
+- Para que los roles funcionen correctamente, asegúrate de registrar usuarios con el rol deseado.
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 # Frontend - KickShopping
 

@@ -30,12 +30,41 @@
 .input-box input {
     width: 100%;
     padding: 10px 40px 10px 10px; /* Espacio para el icono a la derecha */
-    background: none; /* Sin fondo */
-    border: none; /* Quita los bordes */
-    border-bottom: 1px solid #555; /* Línea inferior gris */
+    background: none;
+    border: none;
+    border-bottom: 1px solid #555;
     color: #fff;
     font-size: 1rem;
-    outline: none; /* Quita el borde azul al enfocar */
+    outline: none;
+}
+
+/* Menús desplegables personalizados */
+.input-box select {
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    margin-right: 4px;
+}
+
+/* Botón principal */
+.btn {
+    background: #444 !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+}
+.btn:disabled {
+    background: #222 !important;
+    color: #aaa !important;
+    cursor: not-allowed;
 }
 
 /* Icono dentro del input */
