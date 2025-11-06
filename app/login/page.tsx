@@ -10,7 +10,6 @@ export default function Home() {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const [rememberMe, setRememberMe] = useState(false);
 
     // Alterna abrir/cerrar menú
     const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -161,13 +160,6 @@ export default function Home() {
                                 </span>
                             </div>
                             <div style={{ width: '100%' }}>
-                                <button type="button" className={style.btn} style={{width:'100%',marginTop:12,padding:'6px 18px',background:'#444',color:'#fff'}}>
-                                    ¿Olvidaste tu contraseña?
-                                </button>
-                                <div style={{ display: 'flex', alignItems: 'center', marginTop: 12 }}>
-                                    <input type="checkbox" id="remember" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
-                                    <label htmlFor="remember" style={{ marginLeft: 8 }}>Guardar contraseña</label>
-                                </div>
                             </div>
                             {error && <div style={{ color: "#ff5555", marginBottom: 8 }}>{error}</div>}
                             <button type="submit" className={style["btn"]} disabled={loading}>

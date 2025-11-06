@@ -248,8 +248,6 @@ export default function ProductPage() {
               <p className={style.precio}>${product.price}</p>
               <p className={style.transferencia}>{product.description}</p>
               <div className={style.acciones}>
-                <button className={style["btn-comprar"]}>COMPRAR</button>
-                
                 {/* Botón de eliminar para administradores */}
                 {isAdmin && (
                   <>
