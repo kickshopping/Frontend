@@ -1,0 +1,179 @@
+/* ==========================
+   Reset básico
+========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  line-height: 1.5;
+}
+
+/* ==========================
+   Barra de navegación
+========================== */
+.navbar {
+  background: #111;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* siempre arriba */
+}
+
+#menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.navbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #fff; /* título en blanco */
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.right-icons {
+  display: flex;
+  gap: 15px;
+  font-size: 20px;
+}
+.right-icons a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Admin quick add button in the navbar */
+.admin-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.15s ease, transform 0.08s ease;
+  /* Cuando se inserte dentro de .right-icons usará el flujo normal (inline)
+     Si no se puede insertar en el header se aplica la clase `.fixed` para mantener
+     el comportamiento anterior (posicionamiento fijo en la esquina). */
+  z-index: 1100;
+}
+.admin-add:hover {
+  color: #ddd;
+  transform: translateY(-1px);
+}
+
+/* Fallback: posicionamiento fijo cuando el botón no pudo insertarse en la barra */
+.admin-add.fixed {
+  position: fixed;
+  top: 12px;
+  right: 72px; /* near the other header icons */
+}
+
+/* ==========================
+   Menú desplegable
+========================== */
+.dropdown {
+  display: none;
+  position: fixed;
+  top: 50px; /* debajo de la navbar */
+  left: 0;
+  width: 250px;
+  height: calc(100vh - 50px);
+  background: #111;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 999;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+.dropdown a,
+.dropdown summary {
+  display: block;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.dropdown a:hover,
+.dropdown summary:hover {
+  background: #222;
+}
+
+.dropdown ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #111;
+}
+.dropdown ol li a {
+  padding-left: 25px;
+  font-size: 13px;
+  color: #fff;
+}
+.dropdown ol li a:hover {
+  background: #222;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Indicador de Admin (inline sobre el icono de usuario) */
+.user-link {
+  position: relative;
+  display: inline-block;
+}
+.admin-indicator-inline {
+  /* Siempre presente en el DOM junto al icono de usuario. Visible sólo cuando tenga la clase .visible */
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #00ff00;
+  box-shadow: 0 0 6px rgba(0, 255, 0, 0.6);
+  opacity: 0; /* oculto por defecto */
+  pointer-events: none;
+  transition: opacity 120ms ease, transform 120ms ease;
+  transform: scale(0.85);
+  z-index: 2000;
+}
+.admin-indicator-inline.visible {
+  opacity: 0.95;
+  transform: scale(1);
+}
+

@@ -1,0 +1,67 @@
+.producto-card {
+    background: #000;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.producto-imagen {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.descuento {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #444;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.titulo {
+    margin: 10px 0;
+    color: #fff;
+}
+
+.precio-anterior {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 0.9rem;
+}
+
+.precio {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 5px 0;
+}
+
+.descripcion {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.btn-comprar {
+    background: #222;
+    border: none;
+    margin-top: auto;
+    padding: 12px;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-comprar:hover {
+    background: #444;
+}
