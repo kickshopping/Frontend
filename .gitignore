@@ -1,4 +1,40 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Next.js build and cache
+.next/
+out/
+
+# Node modules
+node_modules/
+
+# Env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MacOS
+.DS_Store
+
+# Editor directories and files
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Local python venvs (if any used in frontend)
+venv/
+.venv/
+nombre_del_entorno/
+
+# Misc
+*.log# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
